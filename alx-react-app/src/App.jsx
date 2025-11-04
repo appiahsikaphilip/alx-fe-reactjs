@@ -1,4 +1,4 @@
-import WelcomeMessage from './Components/WelcomeMessage . jsx'
+import WelcomeMessage from './Components/WelcomeMessage.jsx'
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
@@ -9,8 +9,17 @@ function App() {
 
   return (
     <>
-    {/* Add the WelcomeMessage component here */}
-      <WelcomeMessage />
+    function WelcomeMessage() {
+     (
+        <div>
+            <h1>Hello everyone, I am learning React at ALX!</h1>
+            <p>This is a simple JSX component.</p>
+            <p>I am learning about JSX!</p>
+        </div>
+     )
+}
+
+export default WelcomeMessage;
 
       <div>
         <a href="https://vite.dev" target="_blank">
