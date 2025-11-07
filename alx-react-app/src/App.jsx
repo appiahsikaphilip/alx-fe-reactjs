@@ -1,13 +1,17 @@
-// src/components/UserProfile.jsx
+// src/App.jsx
 
-const UserProfile = (props) => {
+import UserProfile from './components/UserProfile';
+
+function App() {
   return (
-    <div>
-      <h2>{props.name}</h2>
-      <p>Age: {props.age}</p>
-      <p>Bio: {props.bio}</p>
-    </div>
+    <>
+      <UserProfile 
+        name="Alice" 
+        age="25" 
+        bio="Loves hiking and photography" 
+      />
+    </>
   );
-};
+}
 
-export default UserProfile;
+export default App;
