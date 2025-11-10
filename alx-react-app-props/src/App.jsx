@@ -2,7 +2,7 @@ import ProfilePage from './ProfilePage';
 import UserContext from './UserContext';
 
 function App() {
-  const userData = { name: "Appiah Sika Philip", email: "sika@gmail.com.com" };
+  const userData = { name: "SIKA", email: "sika@gmail.com" };
 
   return (
     <UserContext.Provider value={userData}>
