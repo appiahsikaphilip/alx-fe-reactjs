@@ -1,12 +1,9 @@
-import React, { UseContext } from "react";
-import { UserContext } from '../context/UserContextProvider';
+// ProfilePage.jsx
+import React from 'react';
+import UserInfo from './UserInfo';
 
-
-const ProfilePage = () => {
-    const userData = useContext(UserContext);
-    console.log (userData);
-    return <h3>ProfilePage</h3>;
-
-};
+function ProfilePage() {
+  return <UserInfo />; // Remove the userData prop
+}
 
 export default ProfilePage;

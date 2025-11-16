@@ -1,16 +1,14 @@
-import React from "react";
+// App.jsx
+import React from 'react';
 import ProfilePage from './ProfilePage';
-import  UserContextProvider from '../context/UserContextProvider';
+import { UserContext } from './UserContext'; // Import the Context
 
-const userData = createContext();
+function App() {
+  const userData = { name: "Jane Doe", email: "jane.doe@example.com" };
 
-const App = () => {
   return (
-    <UserContext.Provider value={userData}>
-      <div> 
-        <ProfilePage />
-      </div>
-     
+    <UserContext.Provider value={userData}> {/* Provide context here */}
+      <ProfilePage />
     </UserContext.Provider>
   );
 }
