@@ -1,25 +1,35 @@
-import { useRecipeStore } from "./recipeStore";
 import { useParams } from "react-router-dom";
-import EditRecipeForm from "./EditRecipeForm";
-import DeleteRecipeButton from "./DeleteRecipeButton";
+import useRecipeStore from "./recipeStore";
 
-const RecipeDetails = () => {
+const RecipeDetail = () => {
   const { id } = useParams();
+  const recipeId = Number(id);
+
   const recipe = useRecipeStore((state) =>
-    state.recipes.find((r) => r.id === Number(id))
+    state.recipes.find((r) => r.id === recipeId)
   );
 
-  if (!recipe) return <div>Recipe not found.</div>;
+  const addFavorite = useRecipeStore((state) => state.addFavorite);
+  const removeFavorite = useRecipeStore((state) => state.removeFavorite);
+
+  const favorites = useRecipeStore((state) => state.favorites);
+
+  const isFavorite = favorites.includes(recipeId);
+
+  if (!recipe) return <p>Recipe not found.</p>;
 
   return (
     <div>
       <h1>{recipe.title}</h1>
       <p>{recipe.description}</p>
 
-      <EditRecipeForm recipe={recipe} />
-      <DeleteRecipeButton recipeId={recipe.id} />
+      {isFavorite ? (
+        <button onClick={() => removeFavorite(recipeId)}>Remove Favorite</button>
+      ) : (
+        <button onClick={() => addFavorite(recipeId)}>Add to Favorites</button>
+      )}
     </div>
   );
 };
 
-export default RecipeDetails;
+export default RecipeDetail;
