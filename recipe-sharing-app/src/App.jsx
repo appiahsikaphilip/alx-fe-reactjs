@@ -10,13 +10,17 @@ const App = () => {
   return (
     <Router>
       <div style={{ padding: "20px" }}>
-
         <h1>Recipe Sharing App</h1>
 
-        <Link to="/">Home</Link> | <Link to="/add">Add Recipe</Link>
+        {/* Navigation */}
+        <nav>
+          <Link to="/">Home</Link> | <Link to="/add">Add Recipe</Link>
+        </nav>
 
+        {/* Search Bar */}
         <SearchBar />
 
+        {/* Routes */}
         <Routes>
           <Route path="/" element={<RecipeList />} />
           <Route path="/add" element={<AddRecipeForm />} />
