@@ -1,20 +1,6 @@
-// src/UserContext.js
-import { createContext, useState } from "react";
+import React from 'react';
 
-// Create the context
-export const UserContext = createContext();
+// Initialize and export the Context
+const UserContext = React.createContext(null); // You can pass a default value here, e.g., null or an initial object
 
-// Provider component to wrap the app
-export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState({
-    name: "Philip",
-    age: 25,
-    email: "philip@example.com",
-  });
-
-  return (
-    <UserContext.Provider value={{ user, setUser }}>
-      {children}
-    </UserContext.Provider>
-  );
-};
+export default UserContext;

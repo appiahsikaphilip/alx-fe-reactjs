@@ -1,18 +1,15 @@
-// src/App.jsx
-import { UserProvider } from "./UserContext";
-import Header from "./components/Header";
-import UserProfile from "./components/UserProfile";
-import Footer from "./components/Footer";
+import UserContext from './UserContext';
+import ProfilePage from './ProfilePage';
 
 function App() {
+  // The data that will be made available to the component tree
+  const userData = { name: "Jane Doe", email: "jane.doe@example.com" };
+
   return (
-    <UserProvider>
-      <Header />
-      <main>
-        <UserProfile />
-      </main>
-      <Footer />
-    </UserProvider>
+    // Wrap the components that need access to the data with the Provider
+    <UserContext.Provider value={userData}>
+      <ProfilePage />
+    </UserContext.Provider>
   );
 }
 
