@@ -1,14 +1,10 @@
-import React, { useContext } from 'react';
-import UserContext from './UserContext';
+// Import the custom hook
+import { useUser } from './UserContext'; 
 
+// No more need for 'React' import or the generic 'useContext' hook
 function UserDetails() {
-  // Consume the context using the useContext hook
-  const userData = useContext(UserContext);
-
-  // Add a check in case the component is used outside the Provider
-  if (!userData) {
-    return <div>User data not available.</div>;
-  }
+  // Use the custom hook to retrieve the user data
+  const userData = useUser();
 
   return (
     <div>

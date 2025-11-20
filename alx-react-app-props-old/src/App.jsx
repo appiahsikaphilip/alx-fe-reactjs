@@ -1,15 +1,15 @@
-import UserContext from './UserContext';
+// Import the named export UserProvider from the context file
+import { UserProvider } from './UserContext'; 
 import ProfilePage from './ProfilePage';
 
 function App() {
-  // The data that will be made available to the component tree
   const userData = { name: "Jane Doe", email: "jane.doe@example.com" };
 
   return (
-    // Wrap the components that need access to the data with the Provider
-    <UserContext.Provider value={userData}>
+    // Pass the data directly as a prop to the custom Provider component
+    <UserProvider userData={userData}>
       <ProfilePage />
-    </UserContext.Provider>
+    </UserProvider>
   );
 }
 
