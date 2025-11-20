@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-// Updated: Import the named export from the same directory
+// Updated: Use the NAMED import from the local directory
 import { useRecipeStore } from './recipeStore';
 
 const AddRecipeForm = () => {
-  // Access the action (addRecipe)
+  // Access the 'addRecipe' action
   const addRecipe = useRecipeStore(state => state.addRecipe);
   
   const [title, setTitle] = useState('');

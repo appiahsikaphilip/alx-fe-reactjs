@@ -1,4 +1,4 @@
-// Updated: Import the named export from the same directory
+// Updated: Use the NAMED import from the local directory
 import { useRecipeStore } from './recipeStore'; 
 
 const RecipeList = () => {
