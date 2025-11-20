@@ -1,8 +1,7 @@
 import UserInfo from './UserInfo';
 
-// The prop 'userData' is removed
-function ProfilePage() {
-  return <UserInfo />;
+function ProfilePage({ userData }) {
+  return <UserInfo userData={userData} />;
 }
 
 export default ProfilePage;
