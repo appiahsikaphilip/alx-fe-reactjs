@@ -1,10 +1,10 @@
 // src/UserContext.js
 import { createContext, useState } from "react";
 
-// 1. Create the context
+// Create the context
 export const UserContext = createContext();
 
-// 2. Create a provider component
+// Provider component to wrap the app
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({
     name: "Philip",
