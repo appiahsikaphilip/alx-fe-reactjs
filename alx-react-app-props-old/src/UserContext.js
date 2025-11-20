@@ -1,26 +1,6 @@
-// src/UserContext.js
-import { createContext, useState } from "react";
+import React from 'react';
 
-// Create the context
-const UserContext = createContext();
-
-// Create a provider component
-export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState({
-    name: "Guest",
-    email: "",
-    // Add more user properties if needed
-  });
-
-  const updateUser = (newUserData) => {
-    setUser((prev) => ({ ...prev, ...newUserData }));
-  };
-
-  return (
-    <UserContext.Provider value={{ user, updateUser }}>
-      {children}
-    </UserContext.Provider>
-  );
-};
-
-export default UserContext;
+// Create the context object
+// The default value (here, {}) is used when a component consumes the context 
+// but has no matching Provider above it.
+export const UserContext = React.createContext({});
