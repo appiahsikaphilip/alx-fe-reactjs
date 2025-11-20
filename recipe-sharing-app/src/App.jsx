@@ -1,17 +1,22 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+// ... imports for Router, Routes, etc.
 import AddRecipeForm from './components/AddRecipeForm';
 import RecipeList from './components/RecipeList';
 import RecipeDetails from './components/RecipeDetails';
+import SearchBar from './components/SearchBar'; // NEW IMPORT
 import './App.css'; 
 
 const Home = () => (
-    <div style={{ display: 'flex', gap: '40px', marginTop: '20px' }}>
-        <AddRecipeForm />
-        <RecipeList />
+    <div style={{ padding: '20px' }}>
+        <SearchBar /> {/* NEW SEARCH BAR */}
+        <div style={{ display: 'flex', gap: '40px', marginTop: '20px' }}>
+            <AddRecipeForm />
+            <RecipeList />
+        </div>
     </div>
 );
 
 function App() {
+  // ... rest of App component with Router and Routes
   return (
     <Router>
       <div className="App" style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
@@ -22,10 +27,7 @@ function App() {
         </nav>
 
         <Routes>
-          {/* Main route displays the Add Form and the Recipe List */}
           <Route path="/" element={<Home />} />
-          
-          {/* Detailed route for viewing individual recipes */}
           <Route path="/recipes/:id" element={<RecipeDetails />} />
         </Routes>
       </div>
