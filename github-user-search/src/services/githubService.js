@@ -1,42 +1,20 @@
-import axios from "axios";
-
-// Fetch single user by username
-export const fetchUserData = async (username) => {
-  const response = await axios.get(`https://api.github.com/users/${username}`, {
-    headers: {
-      Authorization: `token ${import.meta.env.VITE_APP_GITHUB_API_KEY}`,
-    },
-  });
-  return response.data;
-};
-
-// Fetch users with advanced search and pagination
-export const fetchAdvancedUsers = async ({ username, location, minRepos, page = 1 }) => {
+export const fetchAdvancedUsers = async (username, location, minRepos) => {
   let query = "";
-  if (username) query += `${username} in:login`;
-  if (location) query += ` location:${location}`;
-  if (minRepos) query += ` repos:>=${minRepos}`;
 
-  const response = await axios.get(
-    `https://api.github.com/search/users?q=${encodeURIComponent(query)}&page=${page}&per_page=30`,
-    {
-      headers: {
-        Authorization: `token ${import.meta.env.VITE_APP_GITHUB_API_KEY}`,
-      },
-    }
-  );
+  if (username) query += `${username}+`;
+  if (location) query += `location:${location}+`;
+  if (minRepos) query += `repos:>=${minRepos}`;
 
-  // Fetch extra details for each user (location & repos)
+  const response = await fetch(`https://api.github.com/search/users?q=${query}`);
+  const data = await response.json();
+
+  // Fetch full details for each user
   const detailedUsers = await Promise.all(
-    response.data.items.map(async (user) => {
-      const res = await axios.get(user.url, {
-        headers: {
-          Authorization: `token ${import.meta.env.VITE_APP_GITHUB_API_KEY}`,
-        },
-      });
-      return res.data;
+    data.items.map(async (item) => {
+      const res = await fetch(item.url);
+      return await res.json();
     })
   );
 
-  return { items: detailedUsers };
+  return detailedUsers;
 };
