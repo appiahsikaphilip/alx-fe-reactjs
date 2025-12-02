@@ -7,7 +7,7 @@ function UserProfile() {
         className="rounded-full w-36 h-36 mx-auto"
       />
 
-      <h1 className="text-xl text-blue-800 my-4">
+      <h1 className="text-xl  my-4">
         John Doe
       </h1>
 
