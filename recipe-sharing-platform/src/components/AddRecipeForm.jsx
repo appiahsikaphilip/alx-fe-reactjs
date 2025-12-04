@@ -51,14 +51,13 @@ export default function AddRecipeForm() {
     <div className="max-w-3xl mx-auto p-6 mt-6 bg-white shadow-lg rounded-xl">
       <h2 className="text-2xl font-bold mb-4 text-center">Add New Recipe</h2>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-
+      <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8">
         {/* Title */}
         <div>
           <label className="block font-medium mb-1">Recipe Title</label>
           <input
             type="text"
-            className="w-full border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full md:w-3/4 border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter recipe title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -72,7 +71,7 @@ export default function AddRecipeForm() {
         <div>
           <label className="block font-medium mb-1">Ingredients (each on a new line)</label>
           <textarea
-            className="w-full border p-3 rounded-lg h-32 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full md:w-3/4 border p-3 rounded-lg h-32 focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="e.g. \nTomatoes\nOnions\nSalt"
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
@@ -86,7 +85,7 @@ export default function AddRecipeForm() {
         <div>
           <label className="block font-medium mb-1">Preparation Steps</label>
           <textarea
-            className="w-full border p-3 rounded-lg h-32 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full md:w-3/4 border p-3 rounded-lg h-32 focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Step-by-step instructions..."
             value={steps}
             onChange={(e) => setSteps(e.target.value)}
@@ -99,7 +98,7 @@ export default function AddRecipeForm() {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-3 rounded-lg text-lg hover:bg-blue-700 transition"
+          className="w-full md:w-3/4 bg-blue-600 text-white py-3 rounded-lg text-lg hover:bg-blue-700 transition"
         >
           Add Recipe
         </button>
