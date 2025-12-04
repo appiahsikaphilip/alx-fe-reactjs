@@ -17,6 +17,16 @@ function HomePage() {
         Recipe Sharing Platform
       </h1>
 
+      {/* Add New Recipe Button */}
+      <div className="flex justify-end mb-6">
+        <Link
+          to="/add-recipe"
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+        >
+          Add New Recipe
+        </Link>
+      </div>
+
       {/* Responsive Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {recipes.map((recipe) => (
@@ -35,14 +45,13 @@ function HomePage() {
 
               <p className="text-gray-600 mb-4">{recipe.summary}</p>
 
-              {/* ⭐ Using React Router Link instead of <a> */}
+              {/* View Details Link */}
               <Link
                 to={`/recipe/${recipe.id}`}
                 className="text-blue-600 hover:text-blue-800 font-medium"
               >
                 View Recipe →
               </Link>
-              {/* ⭐ END */}
             </div>
           </div>
         ))}
