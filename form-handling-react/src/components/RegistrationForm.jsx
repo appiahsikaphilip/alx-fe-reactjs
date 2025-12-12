@@ -2,22 +2,26 @@
 import { useState } from "react";
 
 function RegistrationForm() {
-  // Separate state variables
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({}); // ✅ plural 'errors'
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Basic validation
-    if (!username || !email || !password) {
-      setError("All fields are required");
+    const newErrors = {};
+
+    if (!username) newErrors.username = "Username is required"; // ✅ individual checks
+    if (!email) newErrors.email = "Email is required";          // ✅ individual checks
+    if (!password) newErrors.password = "Password is required";// ✅ individual checks
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors); // ✅ now uses setErrors
       return;
     }
 
-    setError("");
+    setErrors({});
     console.log("Submitted data:", { username, email, password });
 
     // Reset form
@@ -31,13 +35,15 @@ function RegistrationForm() {
       <h2>Controlled Registration Form</h2>
 
       <form onSubmit={handleSubmit}>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {errors.username && <p style={{ color: "red" }}>{errors.username}</p>}
+        {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
+        {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
 
         <input
           type="text"
           name="username"
           placeholder="Username"
-          value={username}       // ✅ now literal
+          value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
 
@@ -45,7 +51,7 @@ function RegistrationForm() {
           type="email"
           name="email"
           placeholder="Email"
-          value={email}          // ✅ now literal
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
@@ -53,7 +59,7 @@ function RegistrationForm() {
           type="password"
           name="password"
           placeholder="Password"
-          value={password}       // ✅ now literal
+          value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
 
