@@ -1,82 +1,51 @@
-import { useState } from "react";
+// src/components/RegistrationForm.jsx
+import React, { useState } from 'react';
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
+    username: '',
+    email: '',
+    password: '',
   });
 
-  const [errors, setErrors] = useState({});
-
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const validate = () => {
-    let tempErrors = {};
-
-    if (!formData.username.trim()) tempErrors.username = "Username is required";
-    if (!formData.email.trim()) tempErrors.email = "Email is required";
-    if (!formData.password.trim())
-      tempErrors.password = "Password is required";
-
-    setErrors(tempErrors);
-
-    return Object.keys(tempErrors).length === 0;
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!validate()) return;
-
-    console.log("Form submitted:", formData);
-    alert("Registration successful!");
+    // basic validation
+    if (!formData.username || !formData.email || !formData.password) {
+      alert('All fields are required!');
+      return;
+    }
+    console.log('Form submitted:', formData);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 border rounded max-w-md mx-auto">
-      <h2 className="text-xl font-semibold mb-4">Controlled Registration Form</h2>
-
+    <form onSubmit={handleSubmit}>
       <input
         type="text"
         name="username"
-        placeholder="Username"
         value={formData.username}
         onChange={handleChange}
-        className="w-full border p-2 mb-2"
+        placeholder="Username"
       />
-      {errors.username && <p className="text-red-500">{errors.username}</p>}
-
       <input
         type="email"
         name="email"
-        placeholder="Email"
         value={formData.email}
         onChange={handleChange}
-        className="w-full border p-2 mb-2"
+        placeholder="Email"
       />
-      {errors.email && <p className="text-red-500">{errors.email}</p>}
-
       <input
         type="password"
         name="password"
-        placeholder="Password"
         value={formData.password}
         onChange={handleChange}
-        className="w-full border p-2 mb-2"
+        placeholder="Password"
       />
-      {errors.password && <p className="text-red-500">{errors.password}</p>}
-
-      <button
-        type="submit"
-        className="w-full bg-blue-600 text-white py-2 rounded mt-2"
-      >
-        Register
-      </button>
+      <button type="submit">Register</button>
     </form>
   );
 };
