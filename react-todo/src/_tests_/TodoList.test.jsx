@@ -1,5 +1,5 @@
+// src/__tests__/TodoList.test.jsx
 import { render, screen, fireEvent } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import TodoList from "../components/TodoList";
 
 describe("TodoList Component", () => {
@@ -24,7 +24,6 @@ describe("TodoList Component", () => {
     render(<TodoList />);
     const todo = screen.getByText("Learn React");
 
-    // Initially not completed
     expect(todo).toHaveStyle("text-decoration: none");
 
     fireEvent.click(todo);
