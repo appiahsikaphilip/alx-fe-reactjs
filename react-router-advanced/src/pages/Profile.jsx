@@ -1,0 +1,17 @@
+import { Outlet, Link } from "react-router-dom";
+
+export default function Profile() {
+  return (
+    <div>
+      <h1>Profile Page</h1>
+
+      <nav>
+        <Link to="details">Profile Details</Link> |{" "}
+        <Link to="settings">Profile Settings</Link>
+      </nav>
+
+      {/* Nested routes appear here */}
+      <Outlet />
+    </div>
+  );
+}
