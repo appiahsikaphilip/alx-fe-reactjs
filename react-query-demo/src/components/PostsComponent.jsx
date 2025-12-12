@@ -17,10 +17,11 @@ function PostsComponent() {
     queryKey: ["posts"],
     queryFn: fetchPosts,
 
-    
-    cacheTime: 1000 * 60 * 5,            
-    refetchOnWindowFocus: false,         
-    keepPreviousData: true,              
+    // REQUIRED FIELDS
+    cacheTime: 1000 * 60 * 5,
+    staleTime: 1000 * 30,               // <-- ADDED THIS
+    refetchOnWindowFocus: false,
+    keepPreviousData: true,
   });
 
   if (isLoading) return <p>Loading...</p>;
