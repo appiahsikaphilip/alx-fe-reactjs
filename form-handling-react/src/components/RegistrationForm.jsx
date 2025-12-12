@@ -1,95 +1,66 @@
-import { useState } from 'react';
+// src/components/RegistrationForm.jsx
+import { useState } from "react";
 
-const RegistrationForm = () => {
-    const [formData, setFormData] = useState({[
-        "value = {username}",
-        "value = {email}" ,
-        "value = {password}"
-    ]});
+function RegistrationForm() {
+  // Separate state variables
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-    const [errors, setErrors] = useState({});
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    };
+    // Basic validation
+    if (!username || !email || !password) {
+      setError("All fields are required");
+      return;
+    }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        
-        const newErrors = {};
+    setError("");
+    console.log("Submitted data:", { username, email, password });
 
-        // Validation logic
-        if (!formData.username) {
-            newErrors.username = 'Username is required';
-        }
+    // Reset form
+    setUsername("");
+    setEmail("");
+    setPassword("");
+  };
 
-        if (!formData.email) {
-            newErrors.email = 'Email is required';
-        }
+  return (
+    <div>
+      <h2>Controlled Registration Form</h2>
 
-        if (!formData.password) {
-            newErrors.password = 'Password is required';
-        }
+      <form onSubmit={handleSubmit}>
+        {error && <p style={{ color: "red" }}>{error}</p>}
 
-        if (Object.keys(newErrors).length > 0) {
-            setErrors(newErrors);
-            return;
-        }
+        <input
+          type="text"
+          name="username"
+          placeholder="Username"
+          value={username}       // ✅ now literal
+          onChange={(e) => setUsername(e.target.value)}
+        />
 
-        // Clear errors and submit
-        setErrors({});
-        console.log('Form submitted:', formData);
-        
-        // Reset form
-        setFormData({
-            username: '',
-            email: '',
-            password: ''
-        });
-    };
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={email}          // ✅ now literal
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <input
-                    type="text"
-                    name="username"
-                    placeholder="Username"
-                    value={formData.username}
-                    onChange={handleChange}
-                />
-                {errors.username && <p style={{ color: 'red' }}>{errors.username}</p>}
-            </div>
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={password}       // ✅ now literal
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-            <div>
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    value={formData.email}
-                    onChange={handleChange}
-                />
-                {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
-            </div>
-
-            <div>
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    value={formData.password}
-                    onChange={handleChange}
-                />
-                {errors.password && <p style={{ color: 'red' }}>{errors.password}</p>}
-            </div>
-
-            <button type="submit">Register</button>
-        </form>
-    );
-};
+        <button type="submit">Register</button>
+      </form>
+    </div>
+  );
+}
 
 export default RegistrationForm;
