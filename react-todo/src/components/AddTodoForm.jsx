@@ -1,11 +1,14 @@
 import { useState } from 'react';
 
 const AddTodoForm = ({ onAddTodo }) => {
+  // State to manage input value
   const [inputValue, setInputValue] = useState('');
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     
+    // Basic validation - check that field is not empty
     if (inputValue.trim()) {
       onAddTodo(inputValue.trim());
       setInputValue('');

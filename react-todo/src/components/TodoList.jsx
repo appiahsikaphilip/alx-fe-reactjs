@@ -2,12 +2,14 @@ import { useState } from 'react';
 import AddTodoForm from './AddTodoForm';
 
 const TodoList = () => {
+  // Initialize state with demo todos
   const [todos, setTodos] = useState([
     { id: 1, text: 'Learn React', completed: false },
     { id: 2, text: 'Build a Todo App', completed: false },
     { id: 3, text: 'Master Testing', completed: true }
   ]);
 
+  // Method for adding new todos
   const addTodo = (text) => {
     const newTodo = {
       id: Date.now(),
@@ -17,6 +19,7 @@ const TodoList = () => {
     setTodos([...todos, newTodo]);
   };
 
+  // Method for toggling todo completion status
   const toggleTodo = (id) => {
     setTodos(
       todos.map((todo) =>
@@ -25,6 +28,7 @@ const TodoList = () => {
     );
   };
 
+  // Method for deleting todos
   const deleteTodo = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
@@ -33,14 +37,17 @@ const TodoList = () => {
     <div className="todo-list-container">
       <h1>My Todo List</h1>
       
+      {/* AddTodoForm component to add new todos */}
       <AddTodoForm onAddTodo={addTodo} />
       
+      {/* Display list of todos */}
       <ul className="todo-list">
         {todos.map((todo) => (
           <li
             key={todo.id}
             className={`todo-item ${todo.completed ? 'completed' : ''}`}
           >
+            {/* Click on todo text to toggle completion */}
             <span
               onClick={() => toggleTodo(todo.id)}
               style={{
@@ -51,6 +58,7 @@ const TodoList = () => {
             >
               {todo.text}
             </span>
+            {/* Delete button for each todo */}
             <button
               onClick={() => deleteTodo(todo.id)}
               className="delete-button"

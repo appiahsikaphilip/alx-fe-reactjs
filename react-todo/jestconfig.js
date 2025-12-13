@@ -1,19 +1,9 @@
+// jest.config.js
 export default {
-  testEnvironment: 'jsdom',
+  testEnvironment: "jsdom",  // Enables browser-like environment
   transform: {
-    '^.+\\.jsx?$': 'babel-jest',
+    "^.+\\.jsx?$": "babel-jest", // Transforms JS/JSX using Babel
   },
-  moduleNameMapper: {
-    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
-  },
-  setupFilesAfterEnv: ['<rootDir>/src/setupTests.js'],
-  testMatch: [
-    '**/__tests__/**/*.test.js',
-    '**/__tests__/**/*.test.jsx'
-  ],
-  collectCoverageFrom: [
-    'src/**/*.{js,jsx}',
-    '!src/main.jsx',
-    '!src/**/*.test.{js,jsx}'
-  ],
+  moduleFileExtensions: ["js", "jsx"], // Recognize JS and JSX files
+  setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"], // Optional, adds extra matchers
 };
