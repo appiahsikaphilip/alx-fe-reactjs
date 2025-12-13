@@ -1,35 +1,62 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import AddTodoForm from './AddTodoForm';
 
 const TodoList = () => {
-  const [todos, setTodos] = useState([]);
-  const [inputValue, setInputValue] = useState('');
+  const [todos, setTodos] = useState([
+    { id: 1, text: 'Learn React', completed: false },
+    { id: 2, text: 'Build a Todo App', completed: false },
+    { id: 3, text: 'Master Testing', completed: true }
+  ]);
 
-  const handleAddTodo = () => {
-    if (!inputValue.trim()) return; // Prevent empty todos
-    setTodos([...todos, inputValue]);
-    setInputValue('');
+  const addTodo = (text) => {
+    const newTodo = {
+      id: Date.now(),
+      text: text,
+      completed: false
+    };
+    setTodos([...todos, newTodo]);
   };
 
-  const handleDeleteTodo = (index) => {
-    const newTodos = todos.filter((_, i) => i !== index);
-    setTodos(newTodos);
+  const toggleTodo = (id) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  };
+
+  const deleteTodo = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   return (
-    <div>
-      <h1>Todo List</h1>
-      <input
-        type="text"
-        placeholder="Add todo"      
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-      />
-      <button onClick={handleAddTodo}>Add</button> 
-      <ul>
-        {todos.map((todo, index) => (
-          <li key={index}>
-            {todo}
-            
+    <div className="todo-list-container">
+      <h1>My Todo List</h1>
+      
+      <AddTodoForm onAddTodo={addTodo} />
+      
+      <ul className="todo-list">
+        {todos.map((todo) => (
+          <li
+            key={todo.id}
+            className={`todo-item ${todo.completed ? 'completed' : ''}`}
+          >
+            <span
+              onClick={() => toggleTodo(todo.id)}
+              style={{
+                textDecoration: todo.completed ? 'line-through' : 'none',
+                cursor: 'pointer',
+                flex: 1
+              }}
+            >
+              {todo.text}
+            </span>
+            <button
+              onClick={() => deleteTodo(todo.id)}
+              className="delete-button"
+            >
+              Delete
+            </button>
           </li>
         ))}
       </ul>
