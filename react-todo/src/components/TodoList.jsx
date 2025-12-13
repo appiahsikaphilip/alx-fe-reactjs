@@ -1,28 +1,41 @@
 import React, { useState } from 'react';
 
-export default function TodoList() {
+const TodoList = () => {
   const [todos, setTodos] = useState([]);
-  const [input, setInput] = useState('');
+  const [inputValue, setInputValue] = useState('');
 
-  const addTodo = () => {
-    if (input.trim() === '') return;
-    setTodos([...todos, input]);
-    setInput('');
+  const handleAddTodo = () => {
+    if (!inputValue.trim()) return; // Prevent empty todos
+    setTodos([...todos, inputValue]);
+    setInputValue('');
+  };
+
+  const handleDeleteTodo = (index) => {
+    const newTodos = todos.filter((_, i) => i !== index);
+    setTodos(newTodos);
   };
 
   return (
     <div>
       <h1>Todo List</h1>
-      <input 
-        type="text" 
-        value={input} 
-        onChange={(e) => setInput(e.target.value)} 
-        placeholder="Add todo" 
+      <input
+        type="text"
+        placeholder="Add todo"      // <-- matches test
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
       />
-      <button onClick={addTodo}>Add</button>
+      <button onClick={handleAddTodo}>Add</button>   // <-- matches test
+
       <ul>
-        {todos.map((todo, index) => <li key={index}>{todo}</li>)}
+        {todos.map((todo, index) => (
+          <li key={index}>
+            {todo}
+            <button onClick={() => handleDeleteTodo(index)}>Delete</button>
+          </li>
+        ))}
       </ul>
     </div>
   );
-}
+};
+
+export default TodoList;
