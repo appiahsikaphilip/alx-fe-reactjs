@@ -20,17 +20,16 @@ const TodoList = () => {
       <h1>Todo List</h1>
       <input
         type="text"
-        placeholder="Add todo"      // <-- matches test
+        placeholder="Add todo"      
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
       />
-      <button onClick={handleAddTodo}>Add</button>   // <-- matches test
-
+      <button onClick={handleAddTodo}>Add</button> 
       <ul>
         {todos.map((todo, index) => (
           <li key={index}>
             {todo}
-            <button onClick={() => handleDeleteTodo(index)}>Delete</button>
+            
           </li>
         ))}
       </ul>

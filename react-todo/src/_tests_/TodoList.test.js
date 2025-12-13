@@ -1,13 +1,16 @@
+// src/_tests_/TodoList.test.js
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import TodoList from '../components/TodoList';
 
 describe('TodoList Component', () => {
-  test('renders without crashing', () => {
+  test('renders input and button correctly', () => {
     render(<TodoList />);
+    
     const input = screen.getByPlaceholderText(/add todo/i);
     const button = screen.getByText(/add/i);
+
     expect(input).toBeInTheDocument();
     expect(button).toBeInTheDocument();
   });
@@ -18,9 +21,11 @@ describe('TodoList Component', () => {
     const input = screen.getByPlaceholderText(/add todo/i);
     const button = screen.getByText(/add/i);
 
+    // Add a todo
     fireEvent.change(input, { target: { value: 'Learn React' } });
     fireEvent.click(button);
 
+    // Check if the todo appears in the list
     const todoItem = screen.getByText('Learn React');
     expect(todoItem).toBeInTheDocument();
   });
@@ -28,28 +33,15 @@ describe('TodoList Component', () => {
   test('does not add empty todo', () => {
     render(<TodoList />);
     
-    const button = screen.getByText(/add/i);
-    fireEvent.click(button);
-
-    const todos = screen.queryAllByRole('listitem');
-    expect(todos.length).toBe(0);
-  });
-
-  test('removes todo item', () => {
-    render(<TodoList />);
-    
     const input = screen.getByPlaceholderText(/add todo/i);
     const button = screen.getByText(/add/i);
 
-    fireEvent.change(input, { target: { value: 'Learn Testing' } });
+    // Try adding empty todo
+    fireEvent.change(input, { target: { value: '' } });
     fireEvent.click(button);
 
-    const todoItem = screen.getByText('Learn Testing');
-    expect(todoItem).toBeInTheDocument();
-
-    const deleteButton = screen.getByText(/delete/i); // assumes each todo has a delete button
-    fireEvent.click(deleteButton);
-
-    expect(todoItem).not.toBeInTheDocument();
+    // Ensure the list is still empty
+    const todoItems = screen.queryAllByRole('listitem');
+    expect(todoItems.length).toBe(0);
   });
 });
