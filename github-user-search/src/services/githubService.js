@@ -1,20 +1,9 @@
-export const fetchAdvancedUsers = async (username, location, minRepos) => {
-  let query = "";
+import axios from 'axios';
 
-  if (username) query += `${username}+`;
-  if (location) query += `location:${location}+`;
-  if (minRepos) query += `repos:>=${minRepos}`;
-
-  const response = await fetch(`https://api.github.com/search/users?q=${query}`);
-  const data = await response.json();
-
-  // Fetch full details for each user
-  const detailedUsers = await Promise.all(
-    data.items.map(async (item) => {
-      const res = await fetch(item.url);
-      return await res.json();
-    })
-  );
-
-  return detailedUsers;
+// 1. Function name must be fetchUserData
+// 2. Must use the specific endpoint: https://api.github.com/users/{username}
+// 3. Must use axios
+export const fetchUserData = async (username) => {
+    const response = await axios.get(`https://api.github.com/users/${username}`);
+    return response.data;
 };
