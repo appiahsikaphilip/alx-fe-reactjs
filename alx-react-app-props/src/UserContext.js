@@ -1,7 +1,7 @@
 import React from 'react';
 
-// Create the Context
+// Initialize the Context
 const UserContext = React.createContext();
 
-// Export it so other components can use it
+// Export the context
 export default UserContext;

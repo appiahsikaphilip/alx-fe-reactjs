@@ -1,14 +1,13 @@
-import React from 'react';
-import UserProfile from './UserProfile'; // Ensure this matches your file structure
+import ProfilePage from './ProfilePage';
 import UserContext from './UserContext';
 
 function App() {
   const userData = { name: "Jane Doe", email: "jane.doe@example.com" };
 
   return (
-    // Wrap the component and pass userData as the 'value'
+    // Provide the context value to the component tree
     <UserContext.Provider value={userData}>
-      <UserProfile />
+      <ProfilePage />
     </UserContext.Provider>
   );
 }

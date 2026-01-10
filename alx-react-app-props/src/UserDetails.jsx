@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import UserContext from './UserContext'; // Make sure the path to UserContext is correct
+import UserContext from './UserContext';
 
 function UserDetails() {
-  // Use the useContext hook to access the data directly
+  // Access the context data directly
   const userData = useContext(UserContext);
 
   return (
